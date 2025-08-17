@@ -1,0 +1,9 @@
+### Send POST request with json body
+POST http://127.0.0.1:8080/expenses
+Content-Type: application/json
+
+{
+  "description": "pagamento água",
+   "amount": 10.0,
+   "type": "PIX"
+}
