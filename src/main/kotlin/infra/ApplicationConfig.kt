@@ -1,7 +1,6 @@
 package com.flipedds.infra
 
 import io.ktor.server.netty.*
-
 object ApplicationConfig {
     const val HOST = "localhost"
     const val PORT = 8080
