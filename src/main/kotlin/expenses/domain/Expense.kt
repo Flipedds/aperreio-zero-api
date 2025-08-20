@@ -1,4 +1,4 @@
-package com.flipedds.expenses
+package com.flipedds.expenses.domain
 
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable

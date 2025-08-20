@@ -1,33 +1,22 @@
-package com.flipedds.expenses
+package com.flipedds.expenses.adapters.`in`.repositories
 
+import com.flipedds.expenses.adapters.`in`.tables.Expenses
+import com.flipedds.expenses.domain.Expense
 import kotlinx.coroutines.Dispatchers
-import kotlinx.datetime.LocalDateTime
-import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insertAndGetId
-import org.jetbrains.exposed.sql.kotlin.datetime.datetime
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.update
-import java.time.format.DateTimeFormatter
 import java.util.Optional
 
-class ExpenseService: IExpenseService {
-    object Expenses : IntIdTable() {
-        val description = varchar("description", 255)
-        val amount = double("amount")
-        val date = datetime("date")
-        val type = enumeration<Type>("type")
-    }
-
-    override fun create(expense: ExpenseRequest): Int =
+class ExpenseRepository: IExpenseRepository {
+    override fun create(expense: Expense): Int =
         Expenses.insertAndGetId {
             it[description] = expense.description
             it[amount] = expense.amount
-            it[date] = LocalDateTime.parse(
-                java.time.LocalDateTime.now()
-                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")))
+            it[date] = expense.date
             it[type] = expense.type
         }.value
 
@@ -53,7 +42,6 @@ class ExpenseService: IExpenseService {
             Expenses.update({ Expenses.id eq id }) {
                 it[description] = expense.description
                 it[amount] = expense.amount
-                it[date] = expense.date
                 it[type] = expense.type
             }
     override fun delete(id: Int) = Expenses.deleteWhere { Expenses.id eq(id) }

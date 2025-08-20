@@ -1,25 +1,23 @@
 package com.flipedds
 
-import com.flipedds.config.configureDatabases
-import com.flipedds.config.configureFrameworks
-import com.flipedds.config.configureHTTP
-import com.flipedds.config.configureRouting
-import com.flipedds.config.configureSecurity
-import com.flipedds.expenses.IExpenseService
-import com.flipedds.expenses.expensesRoutes
+import com.flipedds.expenses.adapters.`in`.repositories.IExpenseRepository
+import com.flipedds.expenses.adapters.out.rest.expensesRoutes
+import com.flipedds.infra.*
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import org.koin.ktor.ext.inject
 
 fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0"){
+    embeddedServer(
+        factory = ApplicationConfig.ENGINE,
+        port = ApplicationConfig.PORT,
+        host = ApplicationConfig.HOST) {
         configureFrameworks()
         configureDatabases()
-        val expenseService by inject<IExpenseService>()
+        val expenseRepository by inject<IExpenseRepository>()
         configureSecurity()
         configureHTTP()
         configureRouting {
-            expensesRoutes(expenseService)
+            expensesRoutes(expenseRepository)
         }
     }.start(wait = true)
 }

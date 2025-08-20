@@ -1,4 +1,4 @@
-package com.flipedds.expenses
+package com.flipedds.expenses.adapters.out.dtos
 
 import kotlinx.serialization.Serializable
 

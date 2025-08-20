@@ -1,9 +1,10 @@
-package com.flipedds.expenses
+package com.flipedds.expenses.adapters.`in`.repositories
 
+import com.flipedds.expenses.domain.Expense
 import java.util.Optional
 
-interface IExpenseService {
-    fun create(expense: ExpenseRequest): Int
+interface IExpenseRepository {
+    fun create(expense: Expense): Int
     fun list(): List<Expense>
     fun read(id: Int): Optional<Expense>
     fun update(id: Int, expense: Expense): Int

@@ -1,7 +1,7 @@
-package com.flipedds.config
+package com.flipedds.infra
 
-import com.flipedds.expenses.ExpenseService
-import com.flipedds.expenses.IExpenseService
+import com.flipedds.expenses.adapters.`in`.repositories.ExpenseRepository
+import com.flipedds.expenses.adapters.`in`.repositories.IExpenseRepository
 import io.ktor.server.application.*
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -13,7 +13,7 @@ fun Application.configureFrameworks() {
     install(Koin) {
         slf4jLogger()
         modules(module {
-            singleOf(::ExpenseService) { bind<IExpenseService>() }
+            singleOf(::ExpenseRepository) { bind<IExpenseRepository>() }
         })
     }
 }

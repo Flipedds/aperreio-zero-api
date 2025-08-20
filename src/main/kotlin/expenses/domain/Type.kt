@@ -1,4 +1,4 @@
-package com.flipedds.expenses
+package com.flipedds.expenses.domain
 
 import kotlinx.serialization.Serializable
 

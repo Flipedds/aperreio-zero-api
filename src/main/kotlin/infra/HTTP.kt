@@ -1,6 +1,5 @@
-package com.flipedds.config
+package com.flipedds.infra
 
-import com.flipedds.plugins.RequestLoggingPlugin
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*

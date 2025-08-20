@@ -1,4 +1,4 @@
-package com.flipedds.config
+package com.flipedds.infra
 
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
