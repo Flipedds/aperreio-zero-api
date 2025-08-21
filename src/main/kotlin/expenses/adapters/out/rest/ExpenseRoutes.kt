@@ -41,7 +41,7 @@ fun Routing.expensesRoutes(application: Application) {
                         return@delete
                     }
                     deleteExpense(id)
-                    call.respond(HttpStatusCode.OK)
+                    call.respond(HttpStatusCode.NoContent)
                 }
             }
 

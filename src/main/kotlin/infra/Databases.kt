@@ -6,7 +6,16 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun Application.configureDatabases() {
-    val database = Database.connect(ApplicationConfig.DB_URL, "org.sqlite.JDBC")
+    val url = getStringOrDefault("storage.jdbcURL", "jdbc:sqlite:./db/app.db")
+
+    val driver = getStringOrDefault("storage.driverClassName", "org.sqlite.JDBC")
+
+    val user = getStringOrDefault("storage.user","")
+
+    val pass = getStringOrDefault("storage.password", "")
+
+    val database = Database.connect(url, driver, user, pass)
+
     transaction(database) {
         SchemaUtils.create(Expenses)
     }

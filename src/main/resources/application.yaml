@@ -1,0 +1,18 @@
+ktor:
+  application:
+    modules:
+      - com.flipedds.ApplicationKt.module
+  deployment:
+    port: 8080
+    host: "localhost"
+storage:
+  driverClassName: "org.sqlite.JDBC"
+  jdbcURL: "jdbc:sqlite:./db/app.db"
+  user: ""
+  password: ""
+
+jwt:
+  secret: "secret"
+  realm: "ktor aperreio zero"
+  issuer: "https://jwt-provider-domain/"
+  audience: "jwt-audience"

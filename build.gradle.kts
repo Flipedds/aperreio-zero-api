@@ -1,3 +1,6 @@
+import groovy.lang.Closure
+import org.jetbrains.kotlin.tooling.core.closure
+
 val exposed_version: String by project
 val sqlite_jdbc: String by project
 val koin_version: String by project
@@ -34,6 +37,8 @@ dependencies {
     implementation("io.ktor:ktor-server-netty")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-config-yaml")
+    implementation("io.ktor:ktor-client-content-negotiation")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
 }
