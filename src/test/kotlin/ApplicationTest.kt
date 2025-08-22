@@ -1,7 +1,7 @@
 package com.flipedds
 
 import com.flipedds.expenses.adapters.out.dtos.ExpenseDto
-import com.flipedds.expenses.domain.Type
+import com.flipedds.expenses.domain.valueobjects.Type
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*

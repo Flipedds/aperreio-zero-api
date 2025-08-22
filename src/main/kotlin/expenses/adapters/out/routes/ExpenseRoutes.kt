@@ -1,24 +1,25 @@
-package com.flipedds.expenses.adapters.out.rest
+package com.flipedds.expenses.adapters.out.routes
 
+import com.flipedds.expenses.domain.controllers.ExpenseController
 import com.flipedds.expenses.adapters.out.dtos.ExpenseDto
 import com.flipedds.expenses.adapters.out.converters.toDto
 import com.flipedds.expenses.adapters.out.converters.toEntity
 import com.flipedds.expenses.adapters.out.converters.toListDto
-import com.flipedds.expenses.usecases.*
+import com.flipedds.expenses.domain.usecases.createExpense
+import com.flipedds.expenses.domain.usecases.*
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.*
 
-fun Routing.expensesRoutes(application: Application) {
+fun Routing.expensesRoutes(expenseController: ExpenseController) {
     with(application) {
         route("/expenses") {
             authenticate {
                 post {
                     val expense = call.receive<ExpenseDto>().toEntity()
-                    val id = createExpense(expense)
+                    val id = expenseController.createExpense(expense)
                     call.respond(HttpStatusCode.Created, id to "Expense created successfully !")
                 }
                 put("/{id}") {
@@ -29,7 +30,7 @@ fun Routing.expensesRoutes(application: Application) {
                         return@put
                     }
                     val expense = call.receive<ExpenseDto>().toEntity()
-                    updateExpense(id, expense)
+                    expenseController.updateExpense(id, expense)
                     call.respond(HttpStatusCode.OK)
                 }
 
@@ -40,18 +41,18 @@ fun Routing.expensesRoutes(application: Application) {
                         call.respond(HttpStatusCode.BadRequest, mapOf("error" to "Invalid ID"))
                         return@delete
                     }
-                    deleteExpense(id)
+                    expenseController.deleteExpense(id)
                     call.respond(HttpStatusCode.NoContent)
                 }
             }
 
             get {
-                val expenses = listExpenses()
+                val expenses = expenseController.listExpenses()
                 call.respond(HttpStatusCode.OK, expenses.toListDto())
             }
 
             get("/total") {
-                val total = totalAmountOfExpenses()
+                val total = expenseController.totalAmountOfExpenses()
                 call.respond(HttpStatusCode.OK, mapOf("total" to total))
             }
 
@@ -62,7 +63,7 @@ fun Routing.expensesRoutes(application: Application) {
                     call.respond(HttpStatusCode.BadRequest, mapOf("error" to "Invalid ID"))
                     return@get
                 }
-                val expense = getExpenseById(id)
+                val expense = expenseController.getExpenseById(id)
 
                 if (expense.isPresent) {
                     call.respond(HttpStatusCode.OK, expense.get().toDto())

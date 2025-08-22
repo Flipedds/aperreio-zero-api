@@ -1,4 +1,4 @@
-package com.flipedds.infra
+package com.flipedds.ktor
 
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.json

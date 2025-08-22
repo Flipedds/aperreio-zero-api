@@ -1,6 +1,6 @@
 package com.flipedds.expenses.adapters.`in`.tables
 
-import com.flipedds.expenses.domain.Type
+import com.flipedds.expenses.domain.valueobjects.Type
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.kotlin.datetime.datetime
 

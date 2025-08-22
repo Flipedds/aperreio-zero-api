@@ -1,4 +1,4 @@
-package com.flipedds.infra
+package com.flipedds.ktor
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm

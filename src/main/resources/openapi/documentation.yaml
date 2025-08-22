@@ -6,18 +6,144 @@ info:
 servers:
   - url: "http://0.0.0.0:8080"
 paths:
-  /:
-    get:
-      description: "Hello World!"
+  /auth:
+    post:
+      description: ""
       responses:
         "200":
           description: "OK"
           content:
-            text/plain:
+            '*/*':
               schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: "Hello World!"
+                $ref: "#/components/schemas/HashMap_String"
+  /expenses:
+    get:
+      summary: Lista todas as despesas
+      responses:
+        '200':
+          description: Lista de despesas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseDto'
+    post:
+      summary: Cria uma nova despesa
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseDto'
+      responses:
+        '201':
+          description: Despesa criada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  message:
+                    type: string
+  /expenses/{id}:
+    get:
+      summary: Busca despesa por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Despesa encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDto'
+        '400':
+          description: ID inválido
+        '404':
+          description: Despesa não encontrada
+    put:
+      summary: Atualiza despesa por ID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseDto'
+      responses:
+        '200':
+          description: Despesa atualizada
+        '400':
+          description: ID inválido
+    delete:
+      security:
+        - bearerAuth: [ ]
+      summary: Remove despesa por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Despesa removida
+        '400':
+          description: ID inválido
+  /expenses/total:
+    get:
+      summary: Retorna o total das despesas
+      responses:
+        '200':
+          description: Total das despesas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: number
 components:
-  schemas: { }
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ExpenseDto:
+      type: object
+      properties:
+        description:
+          type: string
+        amount:
+          type: number
+        type:
+          type: string
+          enum:
+            - PIX
+            - CARD_PIC_PAY
+            - CARD_NEON
+            - CARD_BB
+            - CARD_INTER
+            - CARD_NUBANK
+    HashMap:
+      type: "object"
+      properties: { }
+    HashMap_String:
+      type: "string"

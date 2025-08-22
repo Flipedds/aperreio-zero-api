@@ -1,6 +1,6 @@
-package com.flipedds.expenses.adapters.`in`.repositories
+package com.flipedds.expenses.domain.interfaces
 
-import com.flipedds.expenses.domain.Expense
+import com.flipedds.expenses.domain.entities.Expense
 import java.util.Optional
 
 interface IExpenseRepository {

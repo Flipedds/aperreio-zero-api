@@ -1,6 +1,6 @@
 package com.flipedds.expenses.adapters.out.dtos
 
-import com.flipedds.expenses.domain.Type
+import com.flipedds.expenses.domain.valueobjects.Type
 import kotlinx.serialization.Serializable
 
 @Serializable

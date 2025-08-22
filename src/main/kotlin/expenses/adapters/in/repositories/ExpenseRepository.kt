@@ -1,7 +1,8 @@
 package com.flipedds.expenses.adapters.`in`.repositories
 
 import com.flipedds.expenses.adapters.`in`.tables.Expenses
-import com.flipedds.expenses.domain.Expense
+import com.flipedds.expenses.domain.entities.Expense
+import com.flipedds.expenses.domain.interfaces.IExpenseRepository
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere

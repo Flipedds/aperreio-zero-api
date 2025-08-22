@@ -1,7 +1,7 @@
 package com.flipedds.expenses.adapters.out.converters
 
 import com.flipedds.expenses.adapters.out.dtos.ExpenseDto
-import com.flipedds.expenses.domain.Expense
+import com.flipedds.expenses.domain.entities.Expense
 import kotlinx.datetime.LocalDateTime
 import java.time.format.DateTimeFormatter
 

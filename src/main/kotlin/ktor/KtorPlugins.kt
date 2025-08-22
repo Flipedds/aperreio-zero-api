@@ -1,4 +1,4 @@
-package com.flipedds.infra
+package com.flipedds.ktor
 
 import io.ktor.server.application.createApplicationPlugin
 import io.ktor.server.plugins.origin

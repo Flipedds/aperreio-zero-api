@@ -1,4 +1,4 @@
-package com.flipedds.infra
+package com.flipedds.ktor
 
 import com.flipedds.expenses.adapters.`in`.tables.Expenses
 import io.ktor.server.application.*
