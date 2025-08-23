@@ -16,6 +16,7 @@ fun Application.module(){
     configureDatabases()
     configureSecurity()
     configureHTTP()
+    configureMetrics()
 
     // controllers
     val expenseController by inject<ExpenseController>()

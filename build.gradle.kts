@@ -1,11 +1,9 @@
-import groovy.lang.Closure
-import org.jetbrains.kotlin.tooling.core.closure
-
 val exposed_version: String by project
 val sqlite_jdbc: String by project
 val koin_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
+val micrometer_registry_prometheus: String by project
 
 plugins {
     kotlin("jvm") version "2.1.10"
@@ -38,6 +36,9 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-config-yaml")
     implementation("io.ktor:ktor-client-content-negotiation")
+    implementation("io.ktor:ktor-server-status-pages")
+    implementation("io.ktor:ktor-server-metrics-micrometer")
+    implementation("io.micrometer:micrometer-registry-prometheus:$micrometer_registry_prometheus")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
