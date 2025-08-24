@@ -73,7 +73,14 @@ http://localhost:9090/
 ```
 
 Grafana
+
 ``` bash
 http://localhost:3001/
+```
+
+Grafana prometheus datasource
+
+``` bash
+http://prometheus:9090
 ```
 
