@@ -40,7 +40,7 @@ scrape_configs:
   enable_http2: true
   static_configs:
   - targets:
-    - localhost:8080
+    - app:8080
     labels:
       app: prometheus
 otlp:

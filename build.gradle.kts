@@ -1,4 +1,5 @@
 val exposed_version: String by project
+val mysql_jdbc: String by project
 val sqlite_jdbc: String by project
 val koin_version: String by project
 val kotlin_version: String by project
@@ -15,7 +16,7 @@ group = "com.flipedds"
 version = "0.0.1"
 
 application {
-    mainClass = "ApplicationKt"
+    mainClass = "io.ktor.server.netty.EngineMain"
 }
 
 dependencies {
@@ -28,6 +29,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-kotlin-datetime:${exposed_version}")
     implementation("org.xerial:sqlite-jdbc:$sqlite_jdbc")
+    implementation("mysql:mysql-connector-java:$mysql_jdbc")
     implementation("io.ktor:ktor-server-auth")
     implementation("io.ktor:ktor-server-auth-jwt")
     implementation("io.ktor:ktor-server-cors")

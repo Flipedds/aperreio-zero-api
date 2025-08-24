@@ -46,27 +46,34 @@ If the server starts successfully, you'll see the following output:
 2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
 ```
 
-## Prometheus Config
+## Docker compose config
 
-Route
+Run
 
-``` kotlin
-routing {
-        get("/metrics") {
-           call.respond(appMicrometerRegistry.scrape())
-        }
-}
+```bash
+docker compose up --build
 ```
 
-Prometheus config
+API
 
-``` bash
-prometheus --config.file=./prometheus/config.yaml
+``` curl
+http://localhost:8080/
 ```
 
-Prometheus quit
+Metrics
+
+``` curl
+http://localhost:8080/metrics
+```
+
+Prometheus
+
+``` curl
+http://localhost:9090/
+```
+
+Grafana
 ``` bash
-pgrep prometheus
-kill <PID_do_Prometheus>
+http://localhost:3001/
 ```
 

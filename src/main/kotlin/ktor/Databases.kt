@@ -6,7 +6,7 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun Application.configureDatabases() {
-    val url = getStringOrDefault("storage.jdbcURL", "jdbc:sqlite:./db/app.db")
+    val url = getStringOrDefault("storage.jdbcURL", "jdbc:sqlite:./src/main/kotlin/db/app.db")
 
     val driver = getStringOrDefault("storage.driverClassName", "org.sqlite.JDBC")
 
