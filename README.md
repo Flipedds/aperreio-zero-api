@@ -23,64 +23,25 @@ Here's a list of features included in this project:
 | [Authentication](https://start.ktor.io/p/auth)                         | Provides extension point for handling the Authorization header                     |
 | [Authentication JWT](https://start.ktor.io/p/auth-jwt)                 | Handles JSON Web Token (JWT) bearer authentication scheme                          |
 | [CORS](https://start.ktor.io/p/cors)                                   | Enables Cross-Origin Resource Sharing (CORS)                                       |
-| [OpenAPI](https://start.ktor.io/p/swagger)                             | Serves Swagger documentation                                                       |
+| [Swagger](https://start.ktor.io/p/swagger)                             | Serves Swagger documentation                                                       |
 
 ## Building & Running
 
-To build or run the project, use one of the following tasks:
+Docker/Docker compose steps:
 
-| Task                          | Description                                                          |
+| Steps                          | Description                                                          |
 |-------------------------------|----------------------------------------------------------------------|
-| `./gradlew test`              | Run the tests                                                        |
-| `./gradlew build`             | Build everything                                                     |
-| `buildFatJar`                 | Build an executable JAR of the server with all dependencies included |
-| `buildImage`                  | Build the docker image to use with the fat JAR                       |
-| `publishImageToLocalRegistry` | Publish the docker image locally                                     |
-| `run`                         | Run the server                                                       |
-| `runDocker`                   | Run using the local docker image                                     |
+| `run`              | docker compose up --build                                                    |
+| `k6 smoke test`                   |    docker run --rm -it -v ./scripts/load.js:/scripts/load.js \ -p 5665:5665 \ -e K6_WEB_DASHBOARD=true \ grafana/k6 run /scripts/smoke.js                              |
+| `k6 load test`                   |    docker run --rm -it -v ./scripts/load.js:/scripts/load.js \ -p 5665:5665 \ -e K6_WEB_DASHBOARD=true \ grafana/k6 run /scripts/load.js                              |
+| `k6 spike test`                   |    docker run --rm -it -v ./scripts/load.js:/scripts/load.js \ -p 5665:5665 \ -e K6_WEB_DASHBOARD=true \ grafana/k6 run /scripts/spike.js                              |
 
-If the server starts successfully, you'll see the following output:
+Services:
 
-```
-2024-12-04 14:32:45.584 [main] INFO  Application - Application started in 0.303 seconds.
-2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
-```
-
-## Docker compose config
-
-Run
-
-```bash
-docker compose up --build
-```
-
-API
-
-``` curl
-http://localhost:8080/
-```
-
-Metrics
-
-``` curl
-http://localhost:8080/metrics
-```
-
-Prometheus
-
-``` curl
-http://localhost:9090/
-```
-
-Grafana
-
-``` bash
-http://localhost:3001/
-```
-
-Grafana prometheus datasource
-
-``` bash
-http://prometheus:9090
-```
-
+| Description                          | Url                                                          |
+|-------------------------------|----------------------------------------------------------------------|
+| `api`             | http://localhost:8080/                                                  |
+| `metrics`                 | http://localhost:8080/metrics |
+| `prometheus`                  | http://localhost:9090/                      |
+| `grafana` | http://localhost:3001/                                   |
+| `grafana prometheus datasource`                         | http://prometheus:9090                                                 |
