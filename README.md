@@ -32,9 +32,9 @@ Docker/Docker compose steps:
 | Steps                          | Description                                                          |
 |-------------------------------|----------------------------------------------------------------------|
 | `run`              | docker compose up --build                                                    |
-| `k6 smoke test`                   |    docker run --rm -it -v ./scripts/smoke.js:/scripts/smoke.js \ -p 5665:5665 \ -e K6_WEB_DASHBOARD=true \ grafana/k6 run /scripts/smoke.js                              |
-| `k6 load test`                   |    docker run --rm -it -v ./scripts/load.js:/scripts/load.js \ -p 5665:5665 \ -e K6_WEB_DASHBOARD=true \ grafana/k6 run /scripts/load.js                              |
-| `k6 spike test`                   |    docker run --rm -it -v ./scripts/spike.js:/scripts/spike.js \ -p 5665:5665 \ -e K6_WEB_DASHBOARD=true \ grafana/k6 run /scripts/spike.js                              |
+| `k6 smoke test`                   |    docker run --rm -it --network="host" -v ./scripts/smoke.js:/scripts/smoke.js -p 5665:5665 -e K6_WEB_DASHBOARD=true grafana/k6 run /scripts/smoke.js                              |
+| `k6 load test`                   |    docker run --rm -it --network="host" -v ./scripts/load.js:/scripts/load.js -p 5665:5665 -e K6_WEB_DASHBOARD=true grafana/k6 run /scripts/load.js                              |
+| `k6 spike test`                   |    docker run --rm -it --network="host" -v ./scripts/spike.js:/scripts/spike.js -p 5665:5665 -e K6_WEB_DASHBOARD=true grafana/k6 run /scripts/spike.js                              |
 
 Services:
 
